@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Что в чёрном ящике?</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body class="bg-light">
+<div class="container py-5">
+    <h2 class="mb-4 text-center">Перед вами чёрный яшик. </h2>
+    <h3>Проведите тестирование и определите по кокой логике работает&nbsp;&nbsp;функционал</h3>
+
+    <form method="post" class="card shadow-sm p-4 bg-dark" id="letterForm">
+        <div class="mb-3">
+            <label for="user_input" class="form-label"><b style="color: white">Введите&nbsp;&nbsp;строку:</b> <b style="color: #212529">(букв)</b></label>
+            <input type="text" class="form-control" id="user_input" name="user_input"
+                   value="{{ user_input | default('Апельсин') }}" required>
+        </div>
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-warning">Отправить</button>
+            <button type="button" class="btn btn-dark" id="clearBtn"><b style="color: #212529">Очистить</b></button>
+        </div>
+    </form>
+
+    {% if result %}
+    <div class="alert alert-info mt-4" id="resultBlock">
+        <div><strong>Результат:</strong> {{ result }} </div>
+    </div>
+    {% endif %}
+</div>
+
+<div class="container">
+    <div class="d-flex justify-content-between">
+    <h5 class="mb-4 text-center" style="color: #f8f9fa">на странице есть подсказки</h5>
+    <button class="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasHint" aria-controls="offcanvasHint" style="color: #f8f9fa">
+        белый текс названия кнопки для отображения подсказки
+    </button>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasHint" aria-labelledby="offcanvasHintLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasHintLabel">Hint</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div>
+      think about alphabet
+    </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+    document.getElementById("clearBtn").addEventListener("click", function () {
+        document.getElementById("user_input").value = "";
+        const resultBlock = document.getElementById("resultBlock");
+        if (resultBlock) {
+            resultBlock.style.display = "none";
+        }
+    });
+</script>
+</body>
+</html>
